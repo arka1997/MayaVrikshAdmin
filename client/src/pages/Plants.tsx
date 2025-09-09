@@ -1,38 +1,22 @@
 import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { PlantList } from '@/components/plants/PlantList';
-import { UnifiedPlantModal } from '@/components/plants/UnifiedPlantModal';
 import { Button } from '@/components/ui/button';
 import { Plus, Leaf } from 'lucide-react';
 
 export default function Plants() {
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
-  const [modalMode, setModalMode] = useState<'create' | 'edit' | 'variants'>('create');
-  const [selectedPlant, setSelectedPlant] = useState<any>(null);
 
   const handleAddPlant = () => {
-    setSelectedPlant(null);
-    setModalMode('create');
-    setShowModal(true);
+    navigate('/plant-form');
   };
 
   const handleEditPlant = (plantId: string) => {
-    // Fetch plant data and open edit modal
-    setSelectedPlant({ id: plantId }); // You might want to fetch full plant data here
-    setModalMode('edit');
-    setShowModal(true);
+    navigate(`/plant-form?plantId=${plantId}`);
   };
 
   const handleManageVariants = (plantId: string, plantName: string) => {
-    setSelectedPlant({ id: plantId, name: plantName });
-    setModalMode('variants');
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedPlant(null);
+    navigate(`/plant-variants?plantId=${plantId}`);
   };
 
   return (
@@ -61,15 +45,6 @@ export default function Plants() {
       </div>
 
       <PlantList onManageVariants={handleManageVariants} onEditPlant={handleEditPlant} />
-
-      {/* Unified Plant Modal */}
-      {showModal && (
-        <UnifiedPlantModal
-          plant={selectedPlant}
-          mode={modalMode}
-          onClose={handleCloseModal}
-        />
-      )}
     </div>
   );
 }

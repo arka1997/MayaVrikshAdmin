@@ -12,6 +12,7 @@ import AdminLayout from './components/layout/AdminLayout';
 import Dashboard from './pages/Dashboard';
 import Plants from './pages/Plants';
 import PlantForm from './pages/PlantForm';
+import PlantVariants from './pages/PlantVariants';
 import VariantsManagement from './pages/VariantsManagement';
 import Settings from './pages/Settings';
 import { Toaster } from '@/components/ui/toaster';
@@ -25,16 +26,17 @@ function App() {
             <CustomThemeProvider>
               <CssBaseline />
               <Router>
-                <AdminLayout>
-                  <Routes>
-                    <Route path="/" element={<Dashboard />} />
-                    <Route path="/plants" element={<Plants />} />
-                    <Route path="/plants/new" element={<PlantForm />} />
-                    <Route path="/plants/edit/:id" element={<PlantForm />} />
-                    <Route path="/variants" element={<VariantsManagement />} />
-                    <Route path="/settings" element={<Settings />} />
-                  </Routes>
-                </AdminLayout>
+                <Routes>
+                  {/* Routes with AdminLayout (sidebar/navbar) */}
+                  <Route path="/" element={<AdminLayout><Dashboard /></AdminLayout>} />
+                  <Route path="/plants" element={<AdminLayout><Plants /></AdminLayout>} />
+                  <Route path="/variants" element={<AdminLayout><VariantsManagement /></AdminLayout>} />
+                  <Route path="/settings" element={<AdminLayout><Settings /></AdminLayout>} />
+                  
+                  {/* Routes without AdminLayout (full page) */}
+                  <Route path="/plant-form" element={<PlantForm />} />
+                  <Route path="/plant-variants" element={<PlantVariants />} />
+                </Routes>
               </Router>
               <Toaster />
             </CustomThemeProvider>
