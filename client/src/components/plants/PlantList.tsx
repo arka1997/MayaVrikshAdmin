@@ -169,23 +169,25 @@ export function PlantList({ onManageVariants }: PlantListProps) {
                       />
                     </TableCell>
                     <TableCell>
-                      <Box className="flex items-center space-x-1">
-                        <IconButton
+                      <Box className="flex items-center space-x-2">
+                        <Button
                           onClick={() => handleEdit(plant.id)}
-                          color="primary"
+                          variant="outlined"
                           size="small"
+                          startIcon={<Edit />}
                           data-testid={`button-edit-${plant.id}`}
                         >
-                          <Edit />
-                        </IconButton>
-                        <IconButton
+                          Edit
+                        </Button>
+                        <Button
                           onClick={() => onManageVariants?.(plant.id)}
-                          color="secondary"
+                          variant="contained"
                           size="small"
+                          className="bg-green-600 hover:bg-green-700"
                           data-testid={`button-variants-${plant.id}`}
                         >
-                          <Tune />
-                        </IconButton>
+                          Manage Variants
+                        </Button>
                         <IconButton
                           onClick={() => handleDelete(plant.id)}
                           color="error"

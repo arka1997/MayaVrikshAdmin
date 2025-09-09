@@ -217,6 +217,39 @@ export class MemStorage implements IStorage {
       };
       this.tags.set(tagEntity.id, tagEntity);
     });
+
+    // Sample Plants
+    const samplePlants = [
+      {
+        name: "Monstera Deliciosa",
+        scientificName: "Monstera deliciosa",
+        description: "A popular indoor plant with distinctive split leaves",
+        categoryId: indoorCategory.id,
+        isActive: true,
+        isFeatured: true,
+        price: 1299,
+        cost: 800,
+      },
+      {
+        name: "Snake Plant",
+        scientificName: "Sansevieria trifasciata",
+        description: "Low-maintenance air purifying plant perfect for beginners",
+        categoryId: indoorCategory.id,
+        isActive: true,
+        isFeatured: false,
+        price: 899,
+        cost: 500,
+      }
+    ];
+
+    samplePlants.forEach(plant => {
+      const plantEntity: Plant = {
+        id: randomUUID(),
+        ...plant,
+        createdAt: new Date(),
+      };
+      this.plants.set(plantEntity.id, plantEntity);
+    });
   }
 
   // Users
