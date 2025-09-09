@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { 
-  Eco, 
+  Nature, 
   Category, 
   Star, 
   TrendingUp 
@@ -65,7 +65,7 @@ export default function Dashboard() {
         <StatCard
           title="Total Plants"
           value={totalPlants}
-          icon={Eco}
+          icon={Nature}
           trend="+12%"
           description="from last month"
         />
@@ -114,7 +114,7 @@ export default function Dashboard() {
               ) : plants.slice(0, 3).map((plant) => (
                 <div key={plant.id} className="flex items-center space-x-4">
                   <div className="w-12 h-12 gradient-green rounded-lg flex items-center justify-center">
-                    <Eco className="text-white" />
+                    <Nature className="text-white" />
                   </div>
                   <div className="flex-1">
                     <p className="font-medium text-foreground">{plant.name}</p>
