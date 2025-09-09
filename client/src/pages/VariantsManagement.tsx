@@ -1,23 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { SizeProfileForm } from '@/components/variants/SizeProfileForm';
-import { SeasonalCareForm } from '@/components/variants/SeasonalCareForm';
-import { FertilizerForm } from '@/components/variants/FertilizerForm';
-import { ColorVariantForm } from '@/components/variants/ColorVariantForm';
-import { Card, CardContent, CardHeader, Tabs, Tab, Box, Typography } from '@/components/ui/mui-components';
-import { 
-  Straighten, 
-  WbSunny, 
-  LocalFlorist, 
-  Palette 
-} from '@mui/icons-material';
+import { EnhancedVariantForm } from '@/components/variants/EnhancedVariantForm';
+import { Card, CardContent, CardHeader, Box, Typography } from '@/components/ui/mui-components';
 import axios from 'axios';
 
 export default function VariantsManagement() {
   const [searchParams] = useSearchParams();
   const plantId = searchParams.get('plantId');
-  const [activeTab, setActiveTab] = useState(0);
 
   const { data: plant } = useQuery({
     queryKey: ['plants', plantId],
@@ -28,10 +18,6 @@ export default function VariantsManagement() {
     },
     enabled: Boolean(plantId),
   });
-
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
-    setActiveTab(newValue);
-  };
 
   if (!plantId) {
     return (
@@ -44,9 +30,9 @@ export default function VariantsManagement() {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <Typography variant="h4" component="h1" className="text-foreground">
+    <div className="space-y-6 max-w-6xl mx-auto p-6">
+      <div className="mb-6">
+        <Typography variant="h4" component="h1" className="text-gray-800 font-bold mb-2">
           Manage Plant Variants
         </Typography>
         <Typography variant="body1" color="textSecondary">
@@ -54,46 +40,7 @@ export default function VariantsManagement() {
         </Typography>
       </div>
 
-      <Card>
-        <CardHeader>
-          <Tabs value={activeTab} onChange={handleTabChange} variant="scrollable" scrollButtons="auto">
-            <Tab
-              icon={<Straighten />}
-              label="Size Profiles"
-              data-testid="tab-size-profiles"
-            />
-            <Tab
-              icon={<WbSunny />}
-              label="Seasonal Care"
-              data-testid="tab-seasonal-care"
-            />
-            <Tab
-              icon={<LocalFlorist />}
-              label="Fertilizer Schedule"
-              data-testid="tab-fertilizer"
-            />
-            <Tab
-              icon={<Palette />}
-              label="Color Variants"
-              data-testid="tab-color-variants"
-            />
-          </Tabs>
-        </CardHeader>
-        <CardContent>
-          <Box hidden={activeTab !== 0}>
-            <SizeProfileForm plantId={plantId} />
-          </Box>
-          <Box hidden={activeTab !== 1}>
-            <SeasonalCareForm plantId={plantId} />
-          </Box>
-          <Box hidden={activeTab !== 2}>
-            <FertilizerForm plantId={plantId} />
-          </Box>
-          <Box hidden={activeTab !== 3}>
-            <ColorVariantForm plantId={plantId} />
-          </Box>
-        </CardContent>
-      </Card>
+      <EnhancedVariantForm plantId={plantId} />
     </div>
   );
 }
