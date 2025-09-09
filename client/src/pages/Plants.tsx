@@ -1,32 +1,37 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { PlantList } from '@/components/plants/PlantList';
-import { BeautifulPlantForm } from '@/components/plants/BeautifulPlantForm';
-import { BeautifulVariantModal } from '@/components/variants/BeautifulVariantModal';
+import { UnifiedPlantModal } from '@/components/plants/UnifiedPlantModal';
 import { Button } from '@/components/ui/button';
 import { Plus, Leaf } from 'lucide-react';
 
 export default function Plants() {
   const navigate = useNavigate();
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [showVariantModal, setShowVariantModal] = useState(false);
-  const [selectedPlant, setSelectedPlant] = useState<{ id: string; name: string } | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMode, setModalMode] = useState<'create' | 'edit' | 'variants'>('create');
+  const [selectedPlant, setSelectedPlant] = useState<any>(null);
 
   const handleAddPlant = () => {
-    setShowAddForm(true);
+    setSelectedPlant(null);
+    setModalMode('create');
+    setShowModal(true);
   };
 
-  const handlePlantSaved = () => {
-    setShowAddForm(false);
+  const handleEditPlant = (plantId: string) => {
+    // Fetch plant data and open edit modal
+    setSelectedPlant({ id: plantId }); // You might want to fetch full plant data here
+    setModalMode('edit');
+    setShowModal(true);
   };
 
   const handleManageVariants = (plantId: string, plantName: string) => {
     setSelectedPlant({ id: plantId, name: plantName });
-    setShowVariantModal(true);
+    setModalMode('variants');
+    setShowModal(true);
   };
 
-  const handleCloseVariantModal = () => {
-    setShowVariantModal(false);
+  const handleCloseModal = () => {
+    setShowModal(false);
     setSelectedPlant(null);
   };
 
@@ -55,22 +60,14 @@ export default function Plants() {
         </div>
       </div>
 
-      <PlantList onManageVariants={handleManageVariants} />
+      <PlantList onManageVariants={handleManageVariants} onEditPlant={handleEditPlant} />
 
-      {/* Beautiful Plant Form Modal */}
-      {showAddForm && (
-        <BeautifulPlantForm
-          onSaved={handlePlantSaved}
-          onCancel={() => setShowAddForm(false)}
-        />
-      )}
-
-      {/* Beautiful Variant Modal */}
-      {showVariantModal && selectedPlant && (
-        <BeautifulVariantModal
-          plantId={selectedPlant.id}
-          plantName={selectedPlant.name}
-          onClose={handleCloseVariantModal}
+      {/* Unified Plant Modal */}
+      {showModal && (
+        <UnifiedPlantModal
+          plant={selectedPlant}
+          mode={modalMode}
+          onClose={handleCloseModal}
         />
       )}
     </div>

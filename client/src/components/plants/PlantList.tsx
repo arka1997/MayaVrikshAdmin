@@ -34,9 +34,10 @@ import axios from 'axios';
 
 interface PlantListProps {
   onManageVariants?: (plantId: string, plantName: string) => void;
+  onEditPlant?: (plantId: string) => void;
 }
 
-export function PlantList({ onManageVariants }: PlantListProps) {
+export function PlantList({ onManageVariants, onEditPlant }: PlantListProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -171,7 +172,7 @@ export function PlantList({ onManageVariants }: PlantListProps) {
                     <TableCell>
                       <Box className="flex items-center space-x-2">
                         <Button
-                          onClick={() => handleEdit(plant.id)}
+                          onClick={() => onEditPlant ? onEditPlant(plant.id) : handleEdit(plant.id)}
                           variant="outlined"
                           size="small"
                           startIcon={<Edit />}
