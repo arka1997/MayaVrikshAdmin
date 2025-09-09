@@ -1,0 +1,185 @@
+🌱 Prompt for Replit — MayaVriksh Plant Admin Dashboard
+
+Build a React + Vite + TypeScript Admin Dashboard for managing Plants, Variants, Care Guidelines, Fertilizers, Colors, Categories, and Tags.
+
+🔹 Tech Stack & Practices
+
+UI Library: React + Vite + TypeScript + Material UI (MUI).
+
+State Management: React Redux Toolkit (createSlice, configureStore).
+
+HTTP Client: Axios with:
+
+Interceptors for auth (inject JWT).
+
+Retry mechanism for failed requests.
+
+Routing: React Router v6.
+
+Config: Global config file (config.ts) to switch between development and production environments.
+
+Error Handling:
+
+React Error Boundary for UI.
+
+Global error handler + wrapper (withErrorHandling) for API calls.
+
+Logging: Global logger utility (info, warn, error). Should log API, Redux, UI events.
+
+Toasts: Use MUI Snackbar for global notifications.
+
+Types: Keep all types/interfaces in src/types/.
+
+Validation: Use Zod schemas, keep in src/validation/.
+
+Imports: Use absolute imports (@/components/...).
+
+React Query (optional, alongside Redux) for caching + server state.
+
+Dark Mode: Add a toggle in Settings page using MUI theme provider.
+
+Protected Routes: Redirect unauthenticated users to Login.
+
+🔹 Pages to Implement
+1.⁠ ⁠🌱 Plants Page (List & Actions)
+
+Shows all Plants in a table (refer to 2nd screenshot).
+
+Columns: Name, Scientific Name, Category, Price (MRP), Status, Actions.
+
+Buttons in Actions: Edit, Delete, Manage Variants.
+
+Button: + Add New Plant → Opens Plant Form Page.
+
+2.⁠ ⁠📝 Plant Form Page
+
+Form fields (from Plants model):
+
+Name, Scientific Name, Description.
+
+Boolean toggles: isActive, isFeatured.
+
+Plant Class, Series, Place of Origin.
+
+Aura Type, Biodiversity Booster, Carbon Absorber.
+
+Temperature (Min/Max).
+
+Soil, Repotting, Maintenance, InsideBox (multi-select).
+
+Arrays: Benefits, Spiritual Use Case, Best for Emotion, Best Gift For, Fun Facts.
+
+Associated Deity, God Aligned.
+
+Dropdown: Select Category (Indoor, Outdoor).
+
+On Save → POST /api/plants.
+
+3.⁠ ⁠🌿 Variants Management Page (refer to 1st screenshot)
+Size Profiles Section
+
+Dropdown: Select Size (Small, Medium, Large).
+
+Inputs: Height (cm), Weight (kg).
+
+Button: Save Size Profile.
+
+Seasonal Care Section
+
+Tabs: Summer, Winter, Monsoon.
+
+Fields (from PlantCareGuidelines):
+
+Watering Frequency, Water Amount (ml).
+
+Dropdown: Sunlight Type.
+
+Dropdown: Humidity Level.
+
+Care Notes.
+
+Button: Save Care Guidelines for Season.
+
+Fertilizer Schedule Section
+
+Add Fertilizer (dropdown from Fertilizer model).
+
+Fields: Application Frequency, Method, Season, Time, Dosage, Safety Notes.
+
+Button: Save Fertilizer Schedule.
+
+Color Variants Section
+
+Add Color Variant (dropdown from Color model).
+
+Fields (from PlantVariants): SKU, Price (MRP), Active toggle, Notes.
+
+Dropdowns:
+
+Tags (multi-select from Tags).
+
+Tag Groups (from TagGroups).
+
+Upload images for variant (primary + additional).
+
+Buttons:
+
+Save Variant.
+
+Save & Add Another Variant.
+
+🔹 API Integration
+
+CRUD APIs for:
+
+Plants (/api/plants)
+
+Variants (/api/variants)
+
+Care Guidelines (/api/care-guidelines)
+
+Fertilizers (/api/fertilizers)
+
+Colors (/api/colors)
+
+Tags & Tag Groups (/api/tags)
+
+Categories (/api/categories)
+
+Each save button → calls corresponding API (split saves).
+
+🔹 Additional Best Practices
+
+Use default export for all React components.
+
+Keep components modular:
+
+PlantList.tsx
+
+PlantForm.tsx
+
+VariantForm.tsx
+
+SeasonalCareForm.tsx
+
+FertilizerForm.tsx
+
+ColorVariantForm.tsx
+
+Reuse FormInput, Dropdown, MultiSelect, FileUpload components.
+
+Maintain UI consistency with MUI Theme + custom overrides.
+
+⚡ Expected Output:
+
+A fully working React + Vite + MUI Admin Dashboard.
+
+With Plants listing, Add/Edit Plant Form, Manage Variants (Size, Care, Fertilizer, Colors, Tags).
+
+All API calls wired with Axios (with retry + interceptors).
+
+State managed via Redux Toolkit + React Query (for caching).
+
+Fully typed with TypeScript (types in /types).
+
+Configurable for dev / prod environments.
