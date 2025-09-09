@@ -33,7 +33,7 @@ import { showSuccessToast, showErrorToast } from '@/utils/errorHandler';
 import axios from 'axios';
 
 interface PlantListProps {
-  onManageVariants?: (plantId: string) => void;
+  onManageVariants?: (plantId: string, plantName: string) => void;
 }
 
 export function PlantList({ onManageVariants }: PlantListProps) {
@@ -180,7 +180,7 @@ export function PlantList({ onManageVariants }: PlantListProps) {
                           Edit
                         </Button>
                         <Button
-                          onClick={() => onManageVariants?.(plant.id)}
+                          onClick={() => onManageVariants?.(plant.id, plant.name)}
                           variant="contained"
                           size="small"
                           className="bg-green-600 hover:bg-green-700"
