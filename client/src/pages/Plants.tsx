@@ -26,8 +26,8 @@ export default function Plants() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-xl font-semibold text-foreground">All Products</h3>
-          <p className="text-muted-foreground">Manage your product inventory</p>
+          <h3 className="text-xl font-semibold text-foreground">All Plants</h3>
+          <p className="text-muted-foreground">Manage your plant inventory</p>
         </div>
         <Button
           onClick={handleAddPlant}
@@ -35,7 +35,7 @@ export default function Plants() {
           data-testid="button-add-plant"
         >
           <Add />
-          <span>Add New Product</span>
+          <span>Add New Plant</span>
         </Button>
       </div>
 

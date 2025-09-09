@@ -110,7 +110,7 @@ export function PlantList({ onManageVariants }: PlantListProps) {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Product</TableCell>
+                <TableCell>Plant</TableCell>
                 <TableCell>Category</TableCell>
                 <TableCell>Status</TableCell>
                 <TableCell>Actions</TableCell>
